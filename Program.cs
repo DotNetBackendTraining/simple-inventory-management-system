@@ -30,6 +30,26 @@ while (true)
 
 void AddProduct()
 {
+    Product? product;
+    do
+    {
+        product = EnterProduct();
+    } while (product == null);
+
+    inventory.Products.Add(product);
+}
+
+void DisplayProducts()
+{
+    var number = 1;
+    foreach (var product in inventory.Products)
+    {
+        Console.WriteLine($"[{number++}] {product}");
+    }
+}
+
+Product? EnterProduct()
+{
     Console.WriteLine("Name:");
     var name = Console.In.ReadLine() ?? string.Empty;
     var valid = !string.IsNullOrEmpty(name);
@@ -40,20 +60,7 @@ void AddProduct()
     Console.WriteLine("Quantity:");
     valid &= int.TryParse(Console.In.ReadLine(), out var quantity);
 
-    if (!valid)
-    {
-        Console.WriteLine("Invalid information!");
-        return;
-    }
-
-    inventory.Products.Add(new Product(name, price, quantity));
-}
-
-void DisplayProducts()
-{
-    var number = 1;
-    foreach (var product in inventory.Products)
-    {
-        Console.WriteLine($"[{number++}] {product}");
-    }
+    if (valid) return new Product(name, price, quantity);
+    Console.WriteLine("Invalid information!");
+    return null;
 }
