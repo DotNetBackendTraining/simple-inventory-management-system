@@ -10,6 +10,7 @@ while (true)
     Console.WriteLine("""
                       Please select an option:
                       1. Add product to inventory
+                      2. Display all products
                       else. Exit
                       """);
     var input = Console.In.ReadLine();
@@ -18,6 +19,9 @@ while (true)
     {
         case "1":
             AddProduct();
+            break;
+        case "2":
+            DisplayProducts();
             break;
         default:
             return 0;
@@ -43,4 +47,13 @@ void AddProduct()
     }
 
     inventory.Products.Add(new Product(name, price, quantity));
+}
+
+void DisplayProducts()
+{
+    var number = 1;
+    foreach (var product in inventory.Products)
+    {
+        Console.WriteLine($"[{number++}] {product}");
+    }
 }
