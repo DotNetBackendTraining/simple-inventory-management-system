@@ -30,12 +30,7 @@ while (true)
 
 void AddProduct()
 {
-    Product? product;
-    do
-    {
-        product = EnterProduct();
-    } while (product == null);
-
+    var product = EnterAndValidateProduct();
     inventory.Products.Add(product);
 }
 
@@ -60,7 +55,17 @@ Product? EnterProduct()
     Console.WriteLine("Quantity:");
     valid &= int.TryParse(Console.In.ReadLine(), out var quantity);
 
-    if (valid) return new Product(name, price, quantity);
-    Console.WriteLine("Invalid information!");
-    return null;
+    return valid ? new Product(name, price, quantity) : null;
+}
+
+Product EnterAndValidateProduct()
+{
+    var product = EnterProduct();
+    while (product == null)
+    {
+        Console.WriteLine("Invalid information!");
+        product = EnterProduct();
+    }
+
+    return product;
 }
