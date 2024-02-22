@@ -12,6 +12,7 @@ while (true)
                       1. Add product to inventory
                       2. Display all products
                       3. Find and display a product
+                      4. Find and edit a product
                       else. Exit
                       """);
     var input = Console.In.ReadLine();
@@ -26,6 +27,9 @@ while (true)
             break;
         case "3":
             FindAndDisplayProduct();
+            break;
+        case "4":
+            FindAndEditProduct();
             break;
         default:
             return 0;
@@ -42,6 +46,20 @@ void FindAndDisplayProduct()
 {
     var product = FindProduct();
     Console.WriteLine(product == null ? "Product not found!" : product);
+}
+
+void FindAndEditProduct()
+{
+    var product = FindProduct();
+    if (product == null)
+    {
+        Console.WriteLine("Product not found!");
+        return;
+    }
+
+    Console.WriteLine("Please enter new product information.");
+    var newProduct = EnterAndValidateProduct();
+    inventory[product.Name] = newProduct;
 }
 
 void DisplayProducts()
