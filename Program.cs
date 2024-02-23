@@ -43,7 +43,7 @@ while (true)
 void AddProduct()
 {
     var product = EnterAndValidateProduct();
-    inventory.Products.Add(product);
+    inventory.AddProduct(product);
 }
 
 void FindAndDisplayProduct()
@@ -63,7 +63,8 @@ void FindAndEditProduct()
 
     Console.WriteLine("Please enter new product information.");
     var newProduct = EnterAndValidateProduct();
-    inventory[product.Name] = newProduct;
+    inventory.DeleteProductByName(product.Name);
+    inventory.AddProduct(newProduct);
 }
 
 void FindAndDeleteProduct()
@@ -75,13 +76,13 @@ void FindAndDeleteProduct()
         return;
     }
 
-    inventory[product.Name] = null;
+    inventory.DeleteProductByName(product.Name);
 }
 
 void DisplayProducts()
 {
     var number = 1;
-    foreach (var product in inventory.Products)
+    foreach (var product in inventory.GetAllProducts())
     {
         Console.WriteLine($"[{number++}] {product}");
     }
@@ -118,5 +119,5 @@ Product? FindProduct()
 {
     Console.WriteLine("Name:");
     var name = Console.In.ReadLine() ?? string.Empty;
-    return string.IsNullOrEmpty(name) ? null : inventory[name];
+    return string.IsNullOrEmpty(name) ? null : inventory.GetProductByName(name);
 }
