@@ -3,7 +3,7 @@
 using SimpleInventoryManagementSystem.Domain;
 using SimpleInventoryManagementSystem.Repository;
 
-var inventory = new Inventory();
+var inventory = new ProductRepository();
 
 while (true)
 {

@@ -2,7 +2,7 @@ using SimpleInventoryManagementSystem.Domain;
 
 namespace SimpleInventoryManagementSystem.Repository;
 
-public class Inventory
+public class ProductRepository
 {
     private readonly List<Product> _products = [];
 
