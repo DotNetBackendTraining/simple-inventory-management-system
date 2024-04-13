@@ -1,9 +1,10 @@
 ﻿// See https://aka.ms/new-console-template for more information
 
 using SimpleInventoryManagementSystem.Domain;
+using SimpleInventoryManagementSystem.Interfaces;
 using SimpleInventoryManagementSystem.Repository;
 
-var inventory = new ProductRepository();
+IProductRepository inventory = new ProductRepository();
 
 while (true)
 {

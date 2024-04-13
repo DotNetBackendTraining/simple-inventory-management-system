@@ -1,8 +1,9 @@
 using SimpleInventoryManagementSystem.Domain;
+using SimpleInventoryManagementSystem.Interfaces;
 
 namespace SimpleInventoryManagementSystem.Repository;
 
-public class ProductRepository
+public class ProductRepository : IProductRepository
 {
     private readonly List<Product> _products = [];
 
