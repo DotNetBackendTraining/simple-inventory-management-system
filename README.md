@@ -1,5 +1,7 @@
 # Simple Inventory Management System
 
+![MicrosoftSQLServer](https://img.shields.io/badge/Microsoft%20SQL%20Server-CC2927?style=for-the-badge&logo=microsoft%20sql%20server&logoColor=white)
+
 **Description:** In this console-based application, you'll create a basic inventory management system. This system will
 allow a user to manage a list of products, where each product has a name, price, and quantity in stock.
 
