@@ -5,16 +5,14 @@ namespace SimpleInventoryManagementSystem.Repository;
 
 public class ProductRepository : IProductRepository
 {
-    private readonly List<Product> _products = [];
+    private readonly IProductDao _productDao;
+    public ProductRepository(IProductDao productDao) => _productDao = productDao;
 
-    public IEnumerable<Product> GetAllProducts() => _products;
+    public IEnumerable<Product> GetAllProducts() => _productDao.GetAllProducts();
 
-    public Product? GetProductByName(string productName) =>
-        _products.FirstOrDefault(p => p.Name == productName);
+    public Product? GetProductByName(string productName) => _productDao.GetProductByName(productName);
 
-    public void DeleteProductByName(string productName) =>
-        _products.RemoveAll(p => p.Name == productName);
+    public void DeleteProductByName(string productName) => _productDao.DeleteProductByName(productName);
 
-    public void AddProduct(Product product) =>
-        _products.Add(product);
+    public void AddProduct(Product product) => _productDao.AddProduct(product);
 }

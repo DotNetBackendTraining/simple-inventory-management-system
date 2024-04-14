@@ -1,9 +1,10 @@
 ﻿// See https://aka.ms/new-console-template for more information
 
 using SimpleInventoryManagementSystem.Controller;
+using SimpleInventoryManagementSystem.DAO;
 using SimpleInventoryManagementSystem.Repository;
 
-var controller = new UserController(new ProductRepository());
+var controller = new UserController(new ProductRepository(new MemoryProductDao()));
 
 while (true)
 {
