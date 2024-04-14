@@ -2,9 +2,16 @@
 
 using SimpleInventoryManagementSystem.Controller;
 using SimpleInventoryManagementSystem.DAO;
+using SimpleInventoryManagementSystem.Mapper;
 using SimpleInventoryManagementSystem.Repository;
 
-var controller = new UserController(new ProductRepository(new MemoryProductDao()));
+var controller = new UserController(
+    new ProductRepository(
+        new SqlProductDao(
+            new SqlDataSource(Environment.GetEnvironmentVariable("SQL_CONNECTION_STRING") ?? string.Empty),
+            new SqlProductMapper()
+        ))
+);
 
 while (true)
 {
