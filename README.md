@@ -7,6 +7,7 @@
 1. Create the database.
 2. Run all scripts in `db/scripts`.
 3. If sample data is needed use scripts from `db/sample`.
+4. Add the environmental variable: `SQL_CONNECTION_STRING`.
 
 ## Description
 
