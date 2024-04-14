@@ -1,5 +1,6 @@
 ﻿// See https://aka.ms/new-console-template for more information
 
+using SimpleInventoryManagementSystem.Common;
 using SimpleInventoryManagementSystem.Controller;
 using SimpleInventoryManagementSystem.DAO;
 using SimpleInventoryManagementSystem.Mapper;
@@ -25,25 +26,31 @@ while (true)
                       else. Exit
                       """);
     var input = Console.In.ReadLine();
-
-    switch (input)
+    try
     {
-        case "1":
-            controller.AddProduct();
-            break;
-        case "2":
-            controller.DisplayProducts();
-            break;
-        case "3":
-            controller.FindAndDisplayProduct();
-            break;
-        case "4":
-            controller.FindAndEditProduct();
-            break;
-        case "5":
-            controller.FindAndDeleteProduct();
-            break;
-        default:
-            return 0;
+        switch (input)
+        {
+            case "1":
+                controller.AddProduct();
+                break;
+            case "2":
+                controller.DisplayProducts();
+                break;
+            case "3":
+                controller.FindAndDisplayProduct();
+                break;
+            case "4":
+                controller.FindAndEditProduct();
+                break;
+            case "5":
+                controller.FindAndDeleteProduct();
+                break;
+            default:
+                return 0;
+        }
+    }
+    catch (PrintableException ex)
+    {
+        Console.WriteLine(ex);
     }
 }
