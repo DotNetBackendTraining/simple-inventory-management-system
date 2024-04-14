@@ -2,7 +2,15 @@
 
 ![MicrosoftSQLServer](https://img.shields.io/badge/Microsoft%20SQL%20Server-CC2927?style=for-the-badge&logo=microsoft%20sql%20server&logoColor=white)
 
-**Description:** In this console-based application, you'll create a basic inventory management system. This system will
+## Setup
+
+1. Create the database.
+2. Run all scripts in `db/scripts`.
+3. If sample data is needed use scripts from `db/sample`.
+
+## Description
+
+In this console-based application, you'll create a basic inventory management system. This system will
 allow a user to manage a list of products, where each product has a name, price, and quantity in stock.
 
 **GitHub requirements:** You must use Git for version control and host your project on GitHub. Commit and push your
