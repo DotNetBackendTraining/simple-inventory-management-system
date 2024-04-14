@@ -1,5 +1,7 @@
 # Simple Inventory Management System
 
+![MongoDB](https://img.shields.io/badge/MongoDB-%234ea94b.svg?style=for-the-badge&logo=mongodb&logoColor=white)
+
 **Description:** In this console-based application, you'll create a basic inventory management system. This system will
 allow a user to manage a list of products, where each product has a name, price, and quantity in stock.
 
