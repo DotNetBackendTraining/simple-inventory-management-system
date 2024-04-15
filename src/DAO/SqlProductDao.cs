@@ -15,10 +15,10 @@ public class SqlProductDao : IProductDao
         _mapper = mapper;
     }
 
-    public Task<IEnumerable<Product>> GetAllProductsAsync()
+    public async Task<IEnumerable<Product>> GetAllProductsAsync()
     {
         const string sql = "SELECT * FROM Products";
-        using var reader = _dataSource.ExecuteQuery(sql, new List<SqlParameter>());
+        await using var reader = await _dataSource.ExecuteQueryAsync(sql, new List<SqlParameter>());
 
         var products = new List<Product>();
         while (reader.Read())
@@ -26,36 +26,34 @@ public class SqlProductDao : IProductDao
             products.Add(_mapper.MapToDomain(reader));
         }
 
-        return Task.FromResult(products.AsEnumerable());
+        return products;
     }
 
-    public Task<Product?> GetProductByNameAsync(string productName)
+    public async Task<Product?> GetProductByNameAsync(string productName)
     {
         const string sql = "SELECT * FROM Products WHERE Name = @Name";
         var parameters = new List<SqlParameter>
         {
             new("@Name", productName)
         };
-        using var reader = _dataSource.ExecuteQuery(sql, parameters);
-        return Task.FromResult(reader.Read() ? _mapper.MapToDomain(reader) : null);
+        await using var reader = await _dataSource.ExecuteQueryAsync(sql, parameters);
+        return reader.Read() ? _mapper.MapToDomain(reader) : null;
     }
 
-    public Task DeleteProductByNameAsync(string productName)
+    public async Task DeleteProductByNameAsync(string productName)
     {
         const string sql = "DELETE FROM Products WHERE Name = @Name";
         var parameters = new List<SqlParameter>
         {
             new("@Name", productName)
         };
-        _dataSource.ExecuteNonQuery(sql, parameters);
-        return Task.CompletedTask;
+        await _dataSource.ExecuteNonQueryAsync(sql, parameters);
     }
 
-    public Task AddProductAsync(Product product)
+    public async Task AddProductAsync(Product product)
     {
         const string sql = "INSERT INTO Products (Name, Price, Quantity) VALUES (@Name, @Price, @Quantity)";
         var parameters = _mapper.MapToParameters(product);
-        _dataSource.ExecuteNonQuery(sql, parameters);
-        return Task.CompletedTask;
+        await _dataSource.ExecuteNonQueryAsync(sql, parameters);
     }
 }
