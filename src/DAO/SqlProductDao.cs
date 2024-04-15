@@ -15,18 +15,14 @@ public class SqlProductDao : IProductDao
         _mapper = mapper;
     }
 
-    public async Task<IEnumerable<Product>> GetAllProductsAsync()
+    public async IAsyncEnumerable<Product> GetAllProductsAsync()
     {
         const string sql = "SELECT * FROM Products";
         await using var reader = await _dataSource.ExecuteQueryAsync(sql, new List<SqlParameter>());
-
-        var products = new List<Product>();
         while (reader.Read())
         {
-            products.Add(_mapper.MapToDomain(reader));
+            yield return _mapper.MapToDomain(reader);
         }
-
-        return products;
     }
 
     public async Task<Product?> GetProductByNameAsync(string productName)
