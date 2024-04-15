@@ -9,7 +9,8 @@ public class Product
 
     [BsonElement("Name")] public required string Name { get; set; }
 
-    [BsonElement("Price")] public required decimal Price { get; set; }
+    [BsonElement("Price"), BsonRepresentation(BsonType.Decimal128)]
+    public required decimal Price { get; set; }
 
     [BsonElement("Quantity")] public required int Quantity { get; set; }
 
