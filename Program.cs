@@ -1,25 +1,7 @@
-﻿// See https://aka.ms/new-console-template for more information
-
+﻿using SimpleInventoryManagementSystem;
 using SimpleInventoryManagementSystem.Common;
-using SimpleInventoryManagementSystem.Controller;
-using SimpleInventoryManagementSystem.DAO;
-using SimpleInventoryManagementSystem.Mapper;
-using SimpleInventoryManagementSystem.Repository;
 
-var connectionString = Environment.GetEnvironmentVariable("SQL_CONNECTION_STRING");
-if (connectionString == null)
-{
-    Console.WriteLine("SQL_CONNECTION_STRING environmental variable was not found");
-    return -1;
-}
-
-var controller = new UserController(
-    new ProductRepository(
-        new SqlProductDao(
-            new SqlDataSource(connectionString),
-            new SqlProductMapper()
-        ))
-);
+var controller = Configuration.BuildUserController();
 
 while (true)
 {
