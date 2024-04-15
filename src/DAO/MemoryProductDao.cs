@@ -7,14 +7,26 @@ public class MemoryProductDao : IProductDao
 {
     private readonly List<Product> _products = [];
 
-    public IEnumerable<Product> GetAllProducts() => _products;
+    public Task<IEnumerable<Product>> GetAllProductsAsync()
+    {
+        return Task.FromResult(_products.AsEnumerable());
+    }
 
-    public Product? GetProductByName(string productName) =>
-        _products.FirstOrDefault(p => p.Name == productName);
+    public Task<Product?> GetProductByNameAsync(string productName)
+    {
+        return Task.FromResult(_products.FirstOrDefault(p => p.Name == productName));
+    }
 
-    public void DeleteProductByName(string productName) =>
+
+    public Task DeleteProductByNameAsync(string productName)
+    {
         _products.RemoveAll(p => p.Name == productName);
+        return Task.CompletedTask;
+    }
 
-    public void AddProduct(Product product) =>
+    public Task AddProductAsync(Product product)
+    {
         _products.Add(product);
+        return Task.CompletedTask;
+    }
 }

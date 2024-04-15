@@ -22,19 +22,19 @@ while (true)
     switch (input)
     {
         case "1":
-            controller.AddProduct();
+            await controller.AddProductAsync();
             break;
         case "2":
-            controller.DisplayProducts();
+            await controller.DisplayProductsAsync();
             break;
         case "3":
-            controller.FindAndDisplayProduct();
+            await controller.FindAndDisplayProductAsync();
             break;
         case "4":
-            controller.FindAndEditProduct();
+            await controller.FindAndEditProductAsync();
             break;
         case "5":
-            controller.FindAndDeleteProduct();
+            await controller.FindAndDeleteProductAsync();
             break;
         default:
             return 0;

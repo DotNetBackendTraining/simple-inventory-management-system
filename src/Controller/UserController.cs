@@ -8,21 +8,21 @@ public class UserController : IUserController
     private readonly IProductRepository _repository;
     public UserController(IProductRepository repository) => _repository = repository;
 
-    public void AddProduct()
+    public async Task AddProductAsync()
     {
-        var product = EnterAndValidateProduct();
-        _repository.AddProduct(product);
+        var product = await EnterAndValidateProductAsync();
+        await _repository.AddProductAsync(product);
     }
 
-    public void FindAndDisplayProduct()
+    public async Task FindAndDisplayProductAsync()
     {
-        var product = FindProduct();
+        var product = await FindProductAsync();
         Console.WriteLine(product == null ? "Product not found!" : product);
     }
 
-    public void FindAndEditProduct()
+    public async Task FindAndEditProductAsync()
     {
-        var product = FindProduct();
+        var product = await FindProductAsync();
         if (product == null)
         {
             Console.WriteLine("Product not found!");
@@ -30,63 +30,63 @@ public class UserController : IUserController
         }
 
         Console.WriteLine("Please enter new product information.");
-        var newProduct = EnterAndValidateProduct();
-        _repository.DeleteProductByName(product.Name);
-        _repository.AddProduct(newProduct);
+        var newProduct = await EnterAndValidateProductAsync();
+        await _repository.DeleteProductByNameAsync(product.Name);
+        await _repository.AddProductAsync(newProduct);
     }
 
-    public void FindAndDeleteProduct()
+    public async Task FindAndDeleteProductAsync()
     {
-        var product = FindProduct();
+        var product = await FindProductAsync();
         if (product == null)
         {
             Console.WriteLine("Product not found!");
             return;
         }
 
-        _repository.DeleteProductByName(product.Name);
+        await _repository.DeleteProductByNameAsync(product.Name);
     }
 
-    public void DisplayProducts()
+    public async Task DisplayProductsAsync()
     {
         var number = 1;
-        foreach (var product in _repository.GetAllProducts())
+        foreach (var product in await _repository.GetAllProductsAsync())
         {
             Console.WriteLine($"[{number++}] {product}");
         }
     }
 
-    private Product? EnterProduct()
+    private async Task<Product?> EnterProductAsync()
     {
         Console.WriteLine("Name:");
-        var name = Console.In.ReadLine() ?? string.Empty;
+        var name = await Console.In.ReadLineAsync() ?? string.Empty;
         var valid = !string.IsNullOrEmpty(name);
 
         Console.WriteLine("Price:");
-        valid &= int.TryParse(Console.In.ReadLine(), out var price);
+        valid &= int.TryParse(await Console.In.ReadLineAsync(), out var price);
 
         Console.WriteLine("Quantity:");
-        valid &= int.TryParse(Console.In.ReadLine(), out var quantity);
+        valid &= int.TryParse(await Console.In.ReadLineAsync(), out var quantity);
 
         return valid ? new Product(name, price, quantity) : null;
     }
 
-    private Product EnterAndValidateProduct()
+    private async Task<Product> EnterAndValidateProductAsync()
     {
-        var product = EnterProduct();
+        var product = await EnterProductAsync();
         while (product == null)
         {
             Console.WriteLine("Invalid information!");
-            product = EnterProduct();
+            product = await EnterProductAsync();
         }
 
         return product;
     }
 
-    private Product? FindProduct()
+    private async Task<Product?> FindProductAsync()
     {
         Console.WriteLine("Name:");
-        var name = Console.In.ReadLine() ?? string.Empty;
-        return string.IsNullOrEmpty(name) ? null : _repository.GetProductByName(name);
+        var name = await Console.In.ReadLineAsync() ?? string.Empty;
+        return string.IsNullOrEmpty(name) ? null : await _repository.GetProductByNameAsync(name);
     }
 }

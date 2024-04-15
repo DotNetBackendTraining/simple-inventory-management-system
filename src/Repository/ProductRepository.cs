@@ -8,11 +8,15 @@ public class ProductRepository : IProductRepository
     private readonly IProductDao _productDao;
     public ProductRepository(IProductDao productDao) => _productDao = productDao;
 
-    public IEnumerable<Product> GetAllProducts() => _productDao.GetAllProducts();
+    public async Task<IEnumerable<Product>> GetAllProductsAsync() =>
+        await _productDao.GetAllProductsAsync();
 
-    public Product? GetProductByName(string productName) => _productDao.GetProductByName(productName);
+    public async Task<Product?> GetProductByNameAsync(string productName) =>
+        await _productDao.GetProductByNameAsync(productName);
 
-    public void DeleteProductByName(string productName) => _productDao.DeleteProductByName(productName);
+    public async Task DeleteProductByNameAsync(string productName) =>
+        await _productDao.DeleteProductByNameAsync(productName);
 
-    public void AddProduct(Product product) => _productDao.AddProduct(product);
+    public async Task AddProductAsync(Product product) =>
+        await _productDao.AddProductAsync(product);
 }
