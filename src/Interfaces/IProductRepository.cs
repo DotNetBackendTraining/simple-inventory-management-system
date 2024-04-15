@@ -4,8 +4,8 @@ namespace SimpleInventoryManagementSystem.Interfaces;
 
 public interface IProductRepository
 {
-    IEnumerable<Product> GetAllProducts();
-    Product? GetProductByName(string productName);
-    void DeleteProductByName(string productName);
-    void AddProduct(Product product);
+    Task<IEnumerable<Product>> GetAllProductsAsync();
+    Task<Product?> GetProductByNameAsync(string productName);
+    Task DeleteProductByNameAsync(string productName);
+    Task AddProductAsync(Product product);
 }

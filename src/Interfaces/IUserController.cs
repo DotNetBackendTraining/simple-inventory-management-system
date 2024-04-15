@@ -2,9 +2,9 @@ namespace SimpleInventoryManagementSystem.Interfaces;
 
 public interface IUserController
 {
-    void AddProduct();
-    void FindAndDisplayProduct();
-    void FindAndEditProduct();
-    void FindAndDeleteProduct();
-    void DisplayProducts();
+    Task AddProductAsync();
+    Task FindAndDisplayProductAsync();
+    Task FindAndEditProductAsync();
+    Task FindAndDeleteProductAsync();
+    Task DisplayProductsAsync();
 }
