@@ -50,7 +50,7 @@ public class UserController : IUserController
     public async Task DisplayProductsAsync()
     {
         var number = 1;
-        foreach (var product in await _repository.GetAllProductsAsync())
+        await foreach (var product in _repository.GetAllProductsAsync())
         {
             Console.WriteLine($"[{number++}] {product}");
         }
