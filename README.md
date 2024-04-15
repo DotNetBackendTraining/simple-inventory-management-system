@@ -2,7 +2,18 @@
 
 ![MongoDB](https://img.shields.io/badge/MongoDB-%234ea94b.svg?style=for-the-badge&logo=mongodb&logoColor=white)
 
-**Description:** In this console-based application, you'll create a basic inventory management system. This system will
+## Setup
+
+1. **Preparing The Database:**
+    1. Open your MongoDB interface - This can be the MongoDB Shell, MongoDB Compass, or the script/console window in
+       MongoDB Atlas.
+    2. Run `dp/scripts/create.js` to create the collections, validators, and indexes.
+    3. Run `dp/scripts/seed.js` if you want sample data.
+2. Add the variable `MONGODB_CONNECTION_STRING` to your environment.
+
+## Description
+
+In this console-based application, you'll create a basic inventory management system. This system will
 allow a user to manage a list of products, where each product has a name, price, and quantity in stock.
 
 **GitHub requirements:** You must use Git for version control and host your project on GitHub. Commit and push your
