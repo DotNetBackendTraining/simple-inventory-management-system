@@ -4,10 +4,13 @@
 
 ## Setup
 
-1. Create the database.
-2. Run all scripts in `db/scripts`.
-3. If sample data is needed use scripts from `db/sample`.
-4. Add the environmental variable: `SQL_CONNECTION_STRING`.
+1. **Preparing The Database:**
+    1. Create the database - With any name and be on any environment,
+       as long as you have its connection string.
+    2. Switch context to it.
+    3. Run `db/scripts/TABLES.sql` to create the schema.
+    4. Run `db/scripts/DATA.sql` if you want sample data.
+2. Add the environmental variable: `SQL_CONNECTION_STRING`.
 
 ## Description
 
