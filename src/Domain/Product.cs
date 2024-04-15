@@ -1,10 +1,17 @@
+using MongoDB.Bson;
+using MongoDB.Bson.Serialization.Attributes;
+
 namespace SimpleInventoryManagementSystem.Domain;
 
 public class Product
 {
-    public required string Name { get; set; }
-    public required decimal Price { get; set; }
-    public required int Quantity { get; set; }
+    [BsonId] public ObjectId Id { get; set; }
+
+    [BsonElement("Name")] public required string Name { get; set; }
+
+    [BsonElement("Price")] public required decimal Price { get; set; }
+
+    [BsonElement("Quantity")] public required int Quantity { get; set; }
 
     public override string ToString() => $"Product: {Name}, {Price} dollar(s), {Quantity} item(s)";
 }
