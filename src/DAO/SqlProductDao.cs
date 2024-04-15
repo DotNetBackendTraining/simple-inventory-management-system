@@ -15,7 +15,7 @@ public class SqlProductDao : IProductDao
         _mapper = mapper;
     }
 
-    public IEnumerable<Product> GetAllProducts()
+    public Task<IEnumerable<Product>> GetAllProductsAsync()
     {
         const string sql = "SELECT * FROM Products";
         using var reader = _dataSource.ExecuteQuery(sql, new List<SqlParameter>());
@@ -26,10 +26,10 @@ public class SqlProductDao : IProductDao
             products.Add(_mapper.MapToDomain(reader));
         }
 
-        return products;
+        return Task.FromResult(products.AsEnumerable());
     }
 
-    public Product? GetProductByName(string productName)
+    public Task<Product?> GetProductByNameAsync(string productName)
     {
         const string sql = "SELECT * FROM Products WHERE Name = @Name";
         var parameters = new List<SqlParameter>
@@ -37,10 +37,10 @@ public class SqlProductDao : IProductDao
             new("@Name", productName)
         };
         using var reader = _dataSource.ExecuteQuery(sql, parameters);
-        return reader.Read() ? _mapper.MapToDomain(reader) : null;
+        return Task.FromResult(reader.Read() ? _mapper.MapToDomain(reader) : null);
     }
 
-    public void DeleteProductByName(string productName)
+    public Task DeleteProductByNameAsync(string productName)
     {
         const string sql = "DELETE FROM Products WHERE Name = @Name";
         var parameters = new List<SqlParameter>
@@ -48,12 +48,14 @@ public class SqlProductDao : IProductDao
             new("@Name", productName)
         };
         _dataSource.ExecuteNonQuery(sql, parameters);
+        return Task.CompletedTask;
     }
 
-    public void AddProduct(Product product)
+    public Task AddProductAsync(Product product)
     {
         const string sql = "INSERT INTO Products (Name, Price, Quantity) VALUES (@Name, @Price, @Quantity)";
         var parameters = _mapper.MapToParameters(product);
         _dataSource.ExecuteNonQuery(sql, parameters);
+        return Task.CompletedTask;
     }
 }
