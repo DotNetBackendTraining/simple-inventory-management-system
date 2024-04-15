@@ -6,10 +6,17 @@ using SimpleInventoryManagementSystem.DAO;
 using SimpleInventoryManagementSystem.Mapper;
 using SimpleInventoryManagementSystem.Repository;
 
+var connectionString = Environment.GetEnvironmentVariable("SQL_CONNECTION_STRING");
+if (connectionString == null)
+{
+    Console.WriteLine("SQL_CONNECTION_STRING environmental variable was not found");
+    return -1;
+}
+
 var controller = new UserController(
     new ProductRepository(
         new SqlProductDao(
-            new SqlDataSource(Environment.GetEnvironmentVariable("SQL_CONNECTION_STRING") ?? string.Empty),
+            new SqlDataSource(connectionString),
             new SqlProductMapper()
         ))
 );
