@@ -68,7 +68,14 @@ public class UserController : IUserController
         Console.WriteLine("Quantity:");
         valid &= int.TryParse(Console.In.ReadLine(), out var quantity);
 
-        return valid ? new Product(name, price, quantity) : null;
+        return valid
+            ? new Product
+            {
+                Name = name,
+                Price = price,
+                Quantity = quantity
+            }
+            : null;
     }
 
     private Product EnterAndValidateProduct()
