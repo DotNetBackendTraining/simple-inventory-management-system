@@ -5,7 +5,7 @@
 ## Setup
 
 1. **Preparing The Database:**
-    1. Create the database - With any name and be on any environment,
+    1. Create the database - With any name on any environment,
        as long as you have its connection string.
     2. Switch context to it.
     3. Run `db/scripts/TABLES.sql` to create the schema.
