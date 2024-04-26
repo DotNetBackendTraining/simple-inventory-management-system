@@ -9,8 +9,7 @@ public class Product
 
     public required string Name { get; set; }
 
-    [BsonRepresentation(BsonType.Decimal128)]
-    public required decimal Price { get; set; }
+    [BsonRepresentation(BsonType.Double)] public required double Price { get; set; }
 
     public required int Quantity { get; set; }
 
