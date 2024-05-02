@@ -8,8 +8,8 @@ public class ProductRepository : IProductRepository
     private readonly IProductDao _productDao;
     public ProductRepository(IProductDao productDao) => _productDao = productDao;
 
-    public IAsyncEnumerable<Product> GetAllProductsAsync() =>
-        _productDao.GetAllProductsAsync();
+    public async Task<IEnumerable<Product>> GetAllProductsAsync() =>
+        await _productDao.GetAllProductsAsync();
 
     public async Task<Product?> GetProductByNameAsync(string productName) =>
         await _productDao.GetProductByNameAsync(productName);

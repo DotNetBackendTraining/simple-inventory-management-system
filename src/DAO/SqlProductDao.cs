@@ -1,4 +1,6 @@
+using System.Data;
 using System.Data.SqlClient;
+using Dapper;
 using SimpleInventoryManagementSystem.Domain;
 using SimpleInventoryManagementSystem.Interfaces;
 
@@ -15,14 +17,18 @@ public class SqlProductDao : IProductDao
         _mapper = mapper;
     }
 
-    public async IAsyncEnumerable<Product> GetAllProductsAsync()
+    public async Task<IEnumerable<Product>> GetAllProductsAsync()
     {
         const string sql = "SELECT * FROM Products";
         await using var reader = await _dataSource.ExecuteQueryAsync(sql, new List<SqlParameter>());
-        while (reader.Read())
+
+        var products = new List<Product>();
+        while (await reader.ReadAsync())
         {
-            yield return _mapper.MapToDomain(reader);
+            products.Add(_mapper.MapToDomain(reader));
         }
+
+        return products;
     }
 
     public async Task<Product?> GetProductByNameAsync(string productName)
