@@ -1,5 +1,4 @@
 using System.Data;
-using System.Data.SqlClient;
 using Dapper;
 using SimpleInventoryManagementSystem.Domain;
 using SimpleInventoryManagementSystem.Interfaces;
@@ -8,54 +7,35 @@ namespace SimpleInventoryManagementSystem.DAO;
 
 public class SqlProductDao : IProductDao
 {
-    private readonly ISqlDataSource _dataSource;
-    private readonly ISqlProductMapper _mapper;
+    private readonly IDbConnection _connection;
 
-    public SqlProductDao(ISqlDataSource dataSource, ISqlProductMapper mapper)
+    public SqlProductDao(IDbConnection connection)
     {
-        _dataSource = dataSource;
-        _mapper = mapper;
+        _connection = connection;
     }
 
     public async Task<IEnumerable<Product>> GetAllProductsAsync()
     {
         const string sql = "SELECT * FROM Products";
-        await using var reader = await _dataSource.ExecuteQueryAsync(sql, new List<SqlParameter>());
-
-        var products = new List<Product>();
-        while (await reader.ReadAsync())
-        {
-            products.Add(_mapper.MapToDomain(reader));
-        }
-
-        return products;
+        return await _connection.QueryAsync<Product>(sql);
     }
 
     public async Task<Product?> GetProductByNameAsync(string productName)
     {
         const string sql = "SELECT * FROM Products WHERE Name = @Name";
-        var parameters = new List<SqlParameter>
-        {
-            new("@Name", productName)
-        };
-        await using var reader = await _dataSource.ExecuteQueryAsync(sql, parameters);
-        return reader.Read() ? _mapper.MapToDomain(reader) : null;
+        var results = await _connection.QueryAsync<Product>(sql, new { Name = productName });
+        return results.FirstOrDefault();
     }
 
     public async Task DeleteProductByNameAsync(string productName)
     {
         const string sql = "DELETE FROM Products WHERE Name = @Name";
-        var parameters = new List<SqlParameter>
-        {
-            new("@Name", productName)
-        };
-        await _dataSource.ExecuteNonQueryAsync(sql, parameters);
+        await _connection.ExecuteAsync(sql, new { Name = productName });
     }
 
     public async Task AddProductAsync(Product product)
     {
         const string sql = "INSERT INTO Products (Name, Price, Quantity) VALUES (@Name, @Price, @Quantity)";
-        var parameters = _mapper.MapToParameters(product);
-        await _dataSource.ExecuteNonQueryAsync(sql, parameters);
+        await _connection.ExecuteAsync(sql, product);
     }
 }
