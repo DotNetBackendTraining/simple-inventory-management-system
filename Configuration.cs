@@ -9,9 +9,9 @@ namespace SimpleInventoryManagementSystem;
 
 public static class Configuration
 {
-    public static IUserController BuildUserController()
+    public static IUserConsoleInterface BuildUserController()
     {
-        return new UserController(new ProductRepository(BuildProductDao()));
+        return new UserConsoleInterface(new ProductRepository(BuildProductDao()));
     }
 
     private static IProductDao BuildProductDao()

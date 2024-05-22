@@ -2,6 +2,12 @@
 
 ![MongoDB](https://img.shields.io/badge/MongoDB-%234ea94b.svg?style=for-the-badge&logo=mongodb&logoColor=white)
 
+## Architecture
+
+![Component Diagram](designs/Excalidraw-ComponentDiagram.png)
+
+Explore it interactively [here](https://excalidraw.com/#json=T6BTs9K0SRBu4Cu0WSxq8,mi0eYCR0Un2B6fDFOqHILQ).
+
 ## Setup
 
 1. **Preparing The Database:**
