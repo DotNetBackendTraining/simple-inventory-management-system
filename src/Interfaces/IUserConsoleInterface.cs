@@ -1,6 +1,6 @@
 namespace SimpleInventoryManagementSystem.Interfaces;
 
-public interface IUserController
+public interface IUserConsoleInterface
 {
     Task AddProductAsync();
     Task FindAndDisplayProductAsync();

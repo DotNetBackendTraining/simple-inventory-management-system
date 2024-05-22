@@ -2,10 +2,16 @@
 
 ![MicrosoftSQLServer](https://img.shields.io/badge/Microsoft%20SQL%20Server-CC2927?style=for-the-badge&logo=microsoft%20sql%20server&logoColor=white)
 
+## Architecture
+
+![Component Diagram](designs/Excalidraw-ComponentDiagram.png)
+
+Explore it interactively [here](https://excalidraw.com/#json=VUvsfobKmNFLvmMaolTFg,yfCOh7wg6SKEISU9D4_PZg).
+
 ## Setup
 
 1. **Preparing The Database:**
-    1. Create the database - With any name and be on any environment,
+    1. Create the database - With any name on any environment,
        as long as you have its connection string.
     2. Switch context to it.
     3. Run `db/scripts/TABLES.sql` to create the schema.

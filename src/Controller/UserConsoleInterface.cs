@@ -3,10 +3,10 @@ using SimpleInventoryManagementSystem.Interfaces;
 
 namespace SimpleInventoryManagementSystem.Controller;
 
-public class UserController : IUserController
+public class UserConsoleInterface : IUserConsoleInterface
 {
     private readonly IProductRepository _repository;
-    public UserController(IProductRepository repository) => _repository = repository;
+    public UserConsoleInterface(IProductRepository repository) => _repository = repository;
 
     public async Task AddProductAsync()
     {
