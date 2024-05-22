@@ -2,6 +2,12 @@
 
 ![MicrosoftSQLServer](https://img.shields.io/badge/Microsoft%20SQL%20Server-CC2927?style=for-the-badge&logo=microsoft%20sql%20server&logoColor=white)
 
+## Architecture
+
+![Component Diagram](designs/Excalidraw-ComponentDiagram.png)
+
+Explore it interactively [here](https://excalidraw.com/#json=T6BTs9K0SRBu4Cu0WSxq8,mi0eYCR0Un2B6fDFOqHILQ).
+
 ## Setup
 
 1. **Preparing The Database:**
