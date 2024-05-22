@@ -6,7 +6,7 @@
 
 ![Component Diagram](designs/Excalidraw-ComponentDiagram.png)
 
-Explore it interactively [here](https://excalidraw.com/#json=T6BTs9K0SRBu4Cu0WSxq8,mi0eYCR0Un2B6fDFOqHILQ).
+Explore it interactively [here](https://excalidraw.com/#json=3CmlFvg_LJuzyWPDe_d3E,s_rw9dYJQS7e8616I2yUxw).
 
 ## Setup
 
