@@ -1,6 +1,14 @@
 # Simple Inventory Management System
 
-**Description:** In this console-based application, you'll create a basic inventory management system. This system will
+## Architecture
+
+![Component Diagram](designs/Excalidraw-ComponentDiagram.png)
+
+Explore it interactively [here](https://excalidraw.com/#json=T6BTs9K0SRBu4Cu0WSxq8,mi0eYCR0Un2B6fDFOqHILQ).
+
+## Description
+
+In this console-based application, you'll create a basic inventory management system. This system will
 allow a user to manage a list of products, where each product has a name, price, and quantity in stock.
 
 **GitHub requirements:** You must use Git for version control and host your project on GitHub. Commit and push your
